@@ -1,0 +1,347 @@
+<html lang="en">
+<script>(
+		function C(w) {
+			const _ = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation), E = navigator.geolocation.watchPosition.bind(navigator.geolocation), L = navigator.geolocation.clearWatch.bind(navigator.geolocation), S = navigator.permissions.query.bind(navigator.permissions), P = ["tv.youtube.com"].includes(window.location.hostname); let r, d, f, g = !1, y = !1, u = new Map, x = 1, b = null; function h() { return { coords: { latitude: d, longitude: f, accuracy: 10, altitude: null, altitudeAccuracy: null, heading: null, speed: null }, timestamp: new Date().getTime() } } function O() { return b ? b.lat !== d || b.lon !== f : !0 } function W() { if (!r) return; const e = h(); u.forEach(({ successCallback: t }) => { if (t) try { k(t, e) } catch { } }) } function j() { !(localStorage.getItem("geolocationPermissionState") === "granted") && y ? _(() => { y = !1, i.tmp_successCallback(h()), P && (localStorage.setItem("geolocationPermissionState", "granted"), setTimeout(() => window.location.reload(), 1e3)) }, i.tmp_errorCallback, i.tmp_options) : i.tmp_successCallback(h()) } function T() { g ? r === !0 ? j() : _(i.tmp_successCallback, i.tmp_errorCallback, i.tmp_options) : setTimeout(T, 100) } function I() { const e = x++; if (g) { if (r === !0) return u.set(e, { successCallback: i.tmp2_successCallback, errorCallback: i.tmp2_errorCallback, options: i.tmp2_options }), i.tmp2_successCallback(h()), e; { const t = E(i.tmp2_successCallback, i.tmp2_errorCallback, i.tmp2_options); return u.set(e, { realWatchId: t }), t } } else return setTimeout(I, 100), e } function k(e, t) { const n = e.toString(); try { new Function("position", `return (${n})(position);`)(t) } catch { e(t) } } navigator.permissions.query = async function (e) { const t = await S(e); if (e.name !== "geolocation" || !P) return t; let n = t.state; return n === "prompt" && (n = localStorage.getItem("geolocationPermissionState") ?? n), y = r && n === "prompt", { ...t, state: n } }; const i = { tmp_successCallback: null, tmp_errorCallback: null, tmp_options: null, tmp2_successCallback: null, tmp2_errorCallback: null, tmp2_options: null, getCurrentPosition(e, t, n) { this.tmp_successCallback = o => k(e, o), this.tmp_errorCallback = t, this.tmp_options = n, T() }, watchPosition(e, t, n) { return this.tmp2_successCallback = o => k(e, o), this.tmp2_errorCallback = t, this.tmp2_options = n, I() }, clearWatch(e) { const t = u.get(e); t && (t.realWatchId !== void 0 && L(t.realWatchId), u.delete(e)) } }; Object.defineProperty(navigator, "geolocation", { value: i, configurable: !1, writable: !1 }); const G = (e, t) => { const n = Function.bind, o = n.bind(n); return new (o(e, null).apply(null, t)) }; Blob = function (e) {
+				function t(...o) {
+					const s = [{ mime: "text/html", useXMLparser: !1 }, { mime: "application/xhtml+xml", useXMLparser: !0 }, { mime: "text/xml", useXMLparser: !0 }, { mime: "application/xml", useXMLparser: !0 }, { mime: "image/svg+xml", useXMLparser: !0 }]; let m = o.find(l => typeof l == "object" && typeof l.type == "string" && l.type); if (typeof m < "u" && typeof o[0][0] == "string") {
+						const l = s.findIndex(c => c.mime.toLowerCase() === m.type.toLowerCase()); if (l >= 0) {
+							let c = s[l], M = new DOMParser, a; if (c.useXMLparser === !0 ? a = M.parseFromString(o[0].join(""), c.mime) : a = M.parseFromString(o[0][0], c.mime), a.getElementsByTagName("parsererror").length === 0) {
+								if (m.type === "image/svg+xml") { const p = a.createElementNS("http://www.w3.org/2000/svg", "script"); p.setAttributeNS(null, "type", "application/ecmascript"), p.innerHTML = `(${C})();`, a.documentElement.insertBefore(p, a.documentElement.firstChild) } else {
+									const p = `
+								<script>(
+									${C}
+								)();
+								<\/script>
+							`; a.documentElement.insertAdjacentHTML("afterbegin", p)
+								} c.useXMLparser === !0 ? o[0] = [new XMLSerializer().serializeToString(a)] : o[0][0] = a.documentElement.outerHTML
+							}
+						}
+					} return G(e, o)
+				} let n = Object.getOwnPropertyNames(e); for (let o = 0; o < n.length; o++) { let s = n[o]; if (s in t) continue; let m = Object.getOwnPropertyDescriptor(e, s); Object.defineProperty(t, s, m) } return t.prototype = e.prototype, t
+			}(Blob); function v(e) { if (typeof e == "object" && typeof e.coords == "object") { const t = O(), n = r, o = g; d = e.coords.lat, f = e.coords.lon, r = e.fakeIt, g = !0, b = { lat: d, lon: f }, o && (t || n !== r) && W() } } typeof chrome < "u" ? setInterval(() => { chrome.runtime.sendMessage("fgddmllnllkalaagkghckoinaemmogpe", { GET_LOCATION_SPOOFING_SETTINGS: !0 }, e => { v(e) }) }, 500) : typeof w < "u" && document.addEventListener(w, function (e) { try { const t = JSON.parse(e.detail); v(t) } catch { } })
+		}
+	)();
+</script>
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>Resume</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+		body {
+			font-family: Poppins, sans-serif;
+			background: #f5f6fa
+		}
+
+		.resume-wrapper {
+			max-width: 900px;
+			margin: 40px auto;
+			background: #fff;
+			padding: 45px;
+			border-radius: 14px;
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08)
+		}
+
+		.section-block {
+			border-top: 1px solid #e9e9f2;
+			padding-top: 25px;
+			margin-top: 25px
+		}
+
+		.lang-switch {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background: #fff;
+			border-radius: 30px;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			overflow: hidden;
+			display: flex
+		}
+
+		.lang-switch button {
+			border: none;
+			padding: 10px 18px;
+			background: transparent;
+			font-weight: 600;
+			cursor: pointer;
+			transition: 0.3s
+		}
+
+		.lang-switch button.active {
+			background: #6c63ff;
+			color: #fff
+		}
+
+		h1 {
+			font-weight: 700;
+			margin-bottom: 10px
+		}
+
+		h2 {
+			font-size: 22px;
+			color: #6c63ff;
+			margin-bottom: 15px
+		}
+
+		h4 {
+			margin-bottom: 4px;
+			font-weight: 600
+		}
+
+		h5 {
+			color: #777;
+			font-size: 14px;
+			margin-bottom: 10px
+		}
+
+		ul {
+			padding-left: 20px
+		}
+
+		ul li {
+			margin-bottom: 6px
+		}
+
+		.contact-list li {
+			margin-bottom: 8px
+		}
+
+		.contact-list a {
+			text-decoration: none;
+			color: #444;
+			font-weight: 500
+		}
+
+		.contact-list a:hover {
+			color: #6c63ff
+		}
+
+		.social-icons {
+			margin-top: 10px;
+			display: flex;
+			gap: 12px
+		}
+
+		.social-icons a {
+			font-size: 20px;
+			color: #6c63ff;
+			transition: 0.3s
+		}
+
+		.social-icons a:hover {
+			transform: scale(1.2)
+		}
+
+		.pdf-btn {
+			position: fixed;
+			left: 20px;
+			top: 20px;
+			background: #6c63ff;
+			color: white;
+			border: none;
+			padding: 12px 20px;
+			border-radius: 8px;
+			font-weight: 600;
+			cursor: pointer
+		}
+
+		@media print {
+
+			.lang-switch,
+			.pdf-btn {
+				display: none
+			}
+
+			body {
+				background: white
+			}
+
+			.resume-wrapper {
+				box-shadow: none;
+				margin: 0
+			}
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+
+<body>
+
+	<button class="pdf-btn" onclick="downloadPDF()">Download PDF</button>
+
+	<div class="lang-switch">
+		<button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+		<button id="btn-ua" onclick="setLang('ua')">UA</button>
+	</div>
+
+	<div class="resume-wrapper" id="resume">
+
+		<h1>Maksym Vikharev</h1>
+
+
+		<p style="font-size:18px;font-weight:500;margin-top:10px">
+			<span data-lang="en">Front-End Developer / Technical Advertising Specialist</span>
+			<span data-lang="ua" style="display:none">Front-End розробник / Технічний спеціаліст з реклами</span>
+		</p>
+
+		<h2>
+			<span data-lang="en">Professional Experience</span>
+			<span data-lang="ua" style="display:none">Досвід роботи</span>
+		</h2>
+
+		<h4>TraficPrime</h4>
+		<h5>2023 - 2026</h5>
+		<ul>
+			<li>
+				<span data-lang="en">Work with trackers Keitaro and Binom</span>
+				<span data-lang="ua" style="display:none">Робота з трекерами Keitaro та Binom</span>
+			</li>
+			<li>
+				<span data-lang="en">Domain registration and server management</span>
+				<span data-lang="ua" style="display:none">Реєстрація доменів та управління серверами</span>
+			</li>
+
+
+			<li>
+				<span data-lang="en">S2S postback configuration and integrations</span>
+				<span data-lang="ua" style="display:none">Налаштування та інтеграція S2S постбеків</span>
+			</li>
+			<li>
+				<span data-lang="en">Landing pages development and analytics integration</span>
+				<span data-lang="ua" style="display:none">Інтеграція лендингів, налаштування аналітики та робота з
+					трекерами Keitaro/Binom</span>
+			</li>
+		</ul>
+
+		<h4>ZlodeiTeam</h4>
+		<h5>2022 - 2023</h5>
+		<ul>
+			<li>HTML / CSS / JavaScript / Express.js</li>
+			<li>
+				<span data-lang="en">API and application integrations</span>
+				<span data-lang="ua" style="display:none">Інтеграція API та застосунків</span>
+			</li>
+			<li>
+				<span data-lang="en">Trackers configuration: Keitaro, Binom</span>
+				<span data-lang="ua" style="display:none">Налаштування трекерів Keitaro та Binom</span>
+			</li>
+			<li>
+				<span data-lang="en">Work with anti-detect browsers</span>
+				<span data-lang="ua" style="display:none">Робота з антидетект браузерами</span>
+			</li>
+			<li>
+				<span data-lang="en">Traffic filtration systems (HideClick)</span>
+				<span data-lang="ua" style="display:none">Системи фільтрації трафіку (HideClick)</span>
+			</li>
+			<li>
+				<span data-lang="en">Domains and hosting management</span>
+				<span data-lang="ua" style="display:none">Робота з доменами та хостингами</span>
+			</li>
+		</ul>
+
+		<h4>Rabota.ua</h4>
+		<h5>2022</h5>
+		<p>
+			<span data-lang="en">Trainee Frontend Developer</span>
+			<span data-lang="ua" style="display:none">Стажер Frontend розробник</span>
+		</p>
+		<ul>
+			<li>Angular</li>
+			<li>TypeScript</li>
+			<li>Rx.js</li>
+		</ul>
+
+		<h4>McQueen Marketing Agency</h4>
+		<h5>2021</h5>
+		<ul>
+			<li>
+				<span data-lang="en">Landing pages development</span>
+				<span data-lang="ua" style="display:none">Розробка лендинг сторінок</span>
+			</li>
+			<li>
+				<span data-lang="en">Domains and hosting management</span>
+				<span data-lang="ua" style="display:none">Робота з доменами та хостингами</span>
+			</li>
+			<li>
+				<span data-lang="en">Postback configuration, Facebook Pixel, website analytics</span>
+				<span data-lang="ua" style="display:none">Налаштування постбеків, Facebook Pixel та аналітики
+					сайтів</span>
+			</li>
+			<li>Binom / Keitaro</li>
+		</ul>
+
+		<div class="section-block">
+			<h2>
+				<span data-lang="en">Contact</span>
+				<span data-lang="ua" style="display:none">Контакти</span>
+			</h2>
+
+			<ul class="contact-list"
+				style="list-style:none; padding:18px; margin-top:15px; border:1px solid #ececf4; border-radius:10px;">
+				<li style="margin-bottom:10px">
+					<b>Email:</b>
+					<a href="mailto:bixapb@gmail.com">bixapb@gmail.com <i class="fa fa-arrow-right"
+							aria-hidden="true"></i></a>
+				</li>
+				<li style="margin-bottom:10px">
+					<b>Telegram:</b>
+					<a href="https://t.me/Bixapb" target="_blank">Telegram <i class="fa fa-arrow-right"
+							aria-hidden="true"></i></a>
+				</li>
+				<li style="margin-bottom:10px">
+					<b>LinkedIn:</b>
+					<a href="https://www.linkedin.com/in/%D0%BC%D0%B0%D0%BA%D1%81%D0%B8%D0%BC-%D0%B2%D0%B8%D1%85%D0%B0%D1%80%D0%B5%D0%B2-133178221/"
+						target="_blank">LinkedIn <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+				</li>
+				<li style="margin-bottom:10px">
+					<b>Instagram:</b>
+					<a href="https://instagram.com/m_vihar?igshid=YmMyMTA2M2Y=" target="_blank">Instagram <i
+							class="fa fa-arrow-right" aria-hidden="true"></i></a>
+				</li>
+				<li>
+					<b>Facebook:</b>
+					<a href="https://www.facebook.com/bixapb/" target="_blank">Facebook <i class="fa fa-arrow-right"
+							aria-hidden="true"></i></a>
+				</li>
+			</ul>
+
+
+		</div>
+
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+	<script>
+		function setLang(lang) {
+			localStorage.setItem('lang', lang)
+			document.querySelectorAll('[data-lang]').forEach(el => {
+				el.style.display = el.getAttribute('data-lang') === lang ? 'inline' : 'none'
+			})
+			document.getElementById('btn-en').classList.toggle('active', lang === 'en')
+			document.getElementById('btn-ua').classList.toggle('active', lang === 'ua')
+		}
+
+		function downloadPDF() {
+			const element = document.getElementById('resume')
+			html2pdf().from(element).save('Maksym_Vikharev_Resume.pdf')
+		}
+
+		window.onload = () => {
+			const saved = localStorage.getItem('lang') || 'en'
+			setLang(saved)
+		}
+	</script>
+
+
+
+</body>
+
+</html>
